@@ -1,0 +1,5 @@
+2025-05-24 23:12:43,696 User 'user1' realizou ação: Login com MFA
+2025-05-24 23:12:43,697 User 'user1' realizou ação: Acessou dados do usuário 'user1'
+2025-05-24 23:12:56,653 User 'user1' realizou ação: Atualizou email do usuário 'user1'
+2025-05-24 23:13:06,691 User 'admin' realizou ação: Login com MFA
+2025-05-24 23:13:06,691 User 'admin' realizou ação: Deletou usuário 'user1'
