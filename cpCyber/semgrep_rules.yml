@@ -1,0 +1,36 @@
+rules:
+  # 1) Detecta uso de input() para leitura de dados possivelmente sensíveis
+  - id: python.raw-input
+    patterns:
+      - pattern: input(...)
+    message: "Uso de input(): considere validação adicional ou getpass() para dados sensíveis."
+    languages: [python]
+    severity: WARNING
+
+  # 2) Detecta leitura de dicionário de senhas em produção
+  - id: python.dict-attack-in-code
+    patterns:
+      - pattern: |
+          with open($FILE, $MODE) as $F:
+              for $LINE in $F:
+                  if $USER.verify_password($LINE.strip()):
+                      ...
+    message: "Lógica de ataque de dicionário embutida: remova do código de produção."
+    languages: [python]
+    severity: INFO
+
+  # 3) Detecta exposição de dados sensíveis via print
+  - id: python.print-sensitive
+    patterns:
+      - pattern: print($X)
+    message: "Evite imprimir dados sensíveis (hashes, senhas, tokens)."
+    languages: [python]
+    severity: INFO
+
+  # 4) Detecta uso de comparação direta de credenciais (sem biblioteca)
+  - id: python.direct-compare
+    patterns:
+      - pattern: $A == $B
+    message: "Comparação direta de credenciais: use bibliotecas que façam time-constant compare."
+    languages: [python]
+    severity: WARNING
